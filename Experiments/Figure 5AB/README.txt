@@ -1,0 +1,1 @@
+> allisolates contains all the data for 311 Fowler/Anderson strains under no treatment/amx/amx+cla, and includes strain name, amoxicillin concentration (ug/mL), clavulanic acid concentration (ug/mL), replicate number (out of 12: 3 bio reps x 4 tech reps), timepoint, and OD measurement. 
