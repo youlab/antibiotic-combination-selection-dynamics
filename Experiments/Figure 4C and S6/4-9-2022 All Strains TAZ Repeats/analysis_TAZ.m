@@ -73,9 +73,44 @@ end
 close all
 %% plot Bla and BlaM together
 
+% % low copy
+% figure(100)
+% hold on
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 1)), squeeze(stderrfractions(2, 2, :, 1)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 2)), squeeze(stderrfractions(2, 2, :, 2)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
+% axis square
+% ylim([0 1])
+% xlim([0 max(inhconcentrations)])
+% %xlabel("TAZ (\mug/mL)")
+% %ylabel("Resistant Fraction")
+% %legend('Periplasmic', 'Cytoplasmic', 'Location', 'northeast', 'FontSize', 24)
+% %legend('boxoff')
+% set(gca, 'FontSize', 30)
+% 
+% %high copy
+% figure(101)
+% hold on
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 3)), squeeze(stderrfractions(2, 2, :, 3)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 4)), squeeze(stderrfractions(2, 2, :, 4)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
+% axis square
+% ylim([0 1])
+% xlim([0 max(inhconcentrations)])
+% %xlabel("TAZ (\mug/mL)")
+% %ylabel("Resistant Fraction")
+% %legend('Bla', 'BlaM', 'Location', 'eastoutside')
+% set(gca, 'FontSize', 30)
+% 
+% %close all
+
+%% plot with replicates
+
 % low copy
-figure(100)
+figure(200)
 hold on
+% scatter replicates
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 1, :, 1)), 100, [0.7 0.7 0.7], 'filled');
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 2, :, 1)), 100, [0.2 0.2 0.2]);
+% plot averages
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 1)), squeeze(stderrfractions(2, 2, :, 1)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 2)), squeeze(stderrfractions(2, 2, :, 2)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
 axis square
@@ -88,8 +123,12 @@ xlim([0 max(inhconcentrations)])
 set(gca, 'FontSize', 30)
 
 %high copy
-figure(101)
+figure(201)
 hold on
+% scatter replicates
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 3, :, 1)), 100, [0.7 0.7 0.7], 'filled');
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 4, :, 1)), 100, [0.2 0.2 0.2]);
+% plot averages
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 3)), squeeze(stderrfractions(2, 2, :, 3)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 4)), squeeze(stderrfractions(2, 2, :, 4)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
 axis square
@@ -101,6 +140,7 @@ xlim([0 max(inhconcentrations)])
 set(gca, 'FontSize', 30)
 
 %close all
+
 
 %% OD 
 % 

@@ -105,7 +105,7 @@ for i = 1:4
     figure(10*i)
     hold on
     imagesc([min(inhibitors) max(inhibitors)], [max(antibiotics) min(antibiotics)], flipud(ODatFinalT(:, :, ialpha, ibetamin, ic)))
-    %colorbar
+    colorbar
     caxis([0 4.5])
     colormap((cmocean('tempo')))
     ax = gca;
@@ -126,7 +126,7 @@ for i = 1:4
     hold on
     imagesc([min(inhibitors) max(inhibitors)], [max(antibiotics) min(antibiotics)], flipud(fractionRatFinalT(:, :, ialpha, ibetamin, ic)))
     set(gca, 'color', [0 0 0]);
-    %colorbar
+    colorbar
     caxis([0 1])
     colormap(cmocean('balance'))
     ax = gca;

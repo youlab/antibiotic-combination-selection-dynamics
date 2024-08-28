@@ -188,10 +188,10 @@ ax.XTick = linspace(min(inhibitors), max(inhibitors), (length(inhibitors)/12+1))
 ax.YTick = linspace(min(antibiotics), max(antibiotics), (length(antibiotics)/12+1));
 ax.XTickLabel = strtrim(cellstr(num2str(inhibitors(1:12:end)', '%2g'))');
 ax.YTickLabel = strtrim(cellstr(num2str(antibiotics(1:12:end)', '%2g'))'); 
-xlabel("Inhibitor")
-ylabel("Antibiotic")
-title("Cell Density")
-set(gca, 'fontsize', 20)
+% xlabel("Inhibitor")
+% ylabel("Antibiotic")
+% title("Cell Density")
+set(gca, 'fontsize', 30)
 axis square
 hold off
 
@@ -209,10 +209,10 @@ ax.XTick = linspace(min(inhibitors), max(inhibitors), (length(inhibitors)/12)+1)
 ax.YTick = linspace(min(antibiotics), max(antibiotics), (length(antibiotics)/12)+1);
 ax.XTickLabel = strtrim(cellstr(num2str(inhibitors(1:12:end)', '%2g'))');
 ax.YTickLabel = strtrim(cellstr(num2str(antibiotics(1:12:end)', '%2g'))');
-xlabel("Inhibitor")
-ylabel("Antibiotic")
-title("Resistant Fraction")
-set(gca, 'fontsize', 20)
+% xlabel("Inhibitor")
+% ylabel("Antibiotic")
+% title("Resistant Fraction")
+set(gca, 'fontsize', 30)
 axis square
 hold off
 %% Identify points along an inhibitory isobole (for supplemental figures)

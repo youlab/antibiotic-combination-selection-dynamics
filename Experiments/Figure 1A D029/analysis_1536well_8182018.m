@@ -113,3 +113,4 @@ indices = 1:(ninhibitor-1)/3:16;
 ax.XTickLabel = compose('%-.2g', inhibitor(indices));
 ax.YTickLabel = string(antibiotic(indices));
 set(gca, 'fontsize', 30')
+set(gcf, 'position', [500 300 700 500])

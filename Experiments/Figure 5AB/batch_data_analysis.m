@@ -46,6 +46,8 @@ counter = 1;
 shift=0;
 indices = [56 87 104 172 202 204 216 247];
 
+plotteddata = zeros(nreplicates*nconditions*8, 145+3);
+
 for i = indices(:, [1 7 4 5 6 8 2 3])
     
     % combinedisolate data: isolate, condition, replicate, timepoints
@@ -56,7 +58,15 @@ for i = indices(:, [1 7 4 5 6 8 2 3])
     set1 = plot(timepoints, squeeze(combinedisolatedata(i+shift, 1, :, :)), 'Color', colors(4, :), 'LineWidth', 3);
     set2 = plot(timepoints, squeeze(combinedisolatedata(i+shift, 2, :, :)), 'Color', colors(1, :), 'LineWidth', 3);
     set3 = plot(timepoints, squeeze(combinedisolatedata(i+shift, 3, :, :)), 'Color', colors(8, :), 'LineWidth', 3);
-    
+
+    start = (counter-1)*nreplicates*nconditions+1;
+    plotteddata(start:start+nreplicates*nconditions-1, 1) = repelem(combinedisolatenames(i), 36);
+    plotteddata(start:start+nreplicates*nconditions-1, 2) = repelem(1:3, nreplicates);
+    plotteddata(start:start+nreplicates*nconditions-1, 3) = repmat(1:12, 1, 3);
+    plotteddata(start:start+nreplicates-1, 4:end) = squeeze(combinedisolatedata(i+shift, 1, :, :));
+    plotteddata(start+nreplicates:start+2*nreplicates-1, 4:end) = squeeze(combinedisolatedata(i+shift, 2, :, :));
+    plotteddata(start+2*nreplicates:start+3*nreplicates-1, 4:end) = squeeze(combinedisolatedata(i+shift, 3, :, :));
+
     if counter == 5
         xlabel("Hours");
         ylabel("OD");
@@ -66,13 +76,15 @@ for i = indices(:, [1 7 4 5 6 8 2 3])
     xlim([0 24]);
     ylim([0 2]);
     title(combinedisolatenames(i))
-    %legend([set1(1), set2(1), set3(1)], "No antibiotic", "50 \mug/mL AMX", "50 \mug/mL AMX +" + newline + "25 \mug/mL CLA", 'Location', 'eastoutside'); 
-    %legend('boxoff')
+    legend([set1(1), set2(1), set3(1)], "No antibiotic", "50 \mug/mL AMX", "50 \mug/mL AMX +" + newline + "25 \mug/mL CLA", 'Location', 'eastoutside'); 
+    legend('boxoff')
     set(gca, 'XTick', linspace(0, 24, 3))
     set(gca,'FontSize',20)
     axis square
     hold off;
     counter = counter + 1;
+
+
 end
 
 %% get averages

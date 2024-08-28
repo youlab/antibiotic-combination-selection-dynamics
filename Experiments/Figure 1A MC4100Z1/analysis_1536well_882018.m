@@ -90,6 +90,13 @@ end
 conditionsaverage = squeeze(mean(conditionsdata, 2));
 conditionsaveragefinal = squeeze(mean(conditionsdatafinal, 2));
 
+%% extract heatmap from conditions
+
+finalODconditions = conditionsaveragefinal(:, ntimepoints);
+antibiotic = conditions_concentrations((1 + ninhibitor*((1:nantibiotic) - 1)), 2);
+inhibitor = conditions_concentrations(1:ninhibitor, 3);
+finalODmap = reshape(finalODconditions, [ninhibitor nantibiotic])';
+
 %%
 figure(10000)
 imagesc([min(inhibitor) max(inhibitor)], [max(antibiotic) min(antibiotic)], flipud(finalODmap));
@@ -109,3 +116,4 @@ ax.XTickLabel = compose('%-.2g', inhibitor(indices));
 ax.YTickLabel = string(antibiotic(indices));
 set(gca, 'fontsize', 30')
 axis square
+set(gcf, 'position', [500 300 700 500])

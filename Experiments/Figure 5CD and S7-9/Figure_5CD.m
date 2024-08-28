@@ -74,16 +74,28 @@ for i = 1:nparams
     ylim(parameter_bounds{parameterorder(i)})
     set(gca, 'FontSize', 16)
 end
+%% mean squared error 
+
+squarederror = (simulatedfromavg - experimental).^2;
+mse = sum(squarederror, 'all') ./ numel(squarederror);
+rmse = sqrt(mse);
 
 %% rsquared and plotting
 colors = crameri('oslo', nrepeats+2);
 
 r = corrcoef(simulatedfromavg, experimental);
+rsquare = r(1, 2)^2;
 
-figure(4)
+% actual rsquared
+ymean = sum(experimental, "all") ./ numel(experimental);
+ssr = sum((experimental - simulatedfromavg).^2, "all");
+sst = sum((experimental - ymean).^2, "all"); 
+rsquared = 1 - (ssr/sst);
+
+figure(13)
 for i = 1:nisolates
     for j = 1:3
-        scatter(simulatedfromavg(i, j, :), experimental(i, j, :), 1, colors(4, :), 'filled')
+        scatter(squeeze(simulatedfromavg(i, j, :)), squeeze(experimental(i, j, :)), 1, colors(4, :), 'filled')
         hold on
     end
 end
@@ -95,7 +107,8 @@ ylim([0 2])
 set(gca, 'FontSize', 24)
 xlabel("Simulated")
 ylabel('Experimental')
-text(1.9, 0.2, strcat("r = ", compose('%.3g', r(1, 2))), 'HorizontalAlignment', 'right', 'FontSize', 30)
+text(1.95, 0.4, strcat("R^2 = ", compose('%.3g', rsquared)), 'HorizontalAlignment', 'right', 'FontSize', 24)
+text(1.95, 0.15, strcat("RMSE = ", compose('%.3g', rmse)), 'HorizontalAlignment', 'right', 'FontSize', 24)
 
 %% simulated vs experimental
 

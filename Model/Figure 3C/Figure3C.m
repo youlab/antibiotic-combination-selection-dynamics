@@ -4,7 +4,7 @@ close all
 %%
 load('randomstrains.mat') % load simulated data
 
-%xi, kappab, phimax, da, ha, gamma, db, hi, alpha, betmain, c, sensitive density,
+%xi, kappab, phimax, da, ha, gamma, db, hi, alpha, betamin, c, sensitive density,
 %resistant density
 % latter two are calculated at minimum resistant fraction along the isobole
 
@@ -53,12 +53,12 @@ set(gca, 'fontsize', 24)
 axis square
 
 %% alternate plotting 
-
-figure(2)
-scatter((maxfraccriterion(:, 1) ./ maxfraccriterion(:, 2)), maxfraccriterion(:, 3), 10, 'k', 'filled');
-ylabel('resistant fraction');
-xlabel('((1 - c)(1 - \betamin))/((1 - \alpha ) / \gamma)');
-ylim([0 1])
-xlim([0 2.5])
-set(gca, 'fontsize', 24)
-axis square
+% 
+% figure(2)
+% scatter((maxfraccriterion(:, 1) ./ maxfraccriterion(:, 2)), maxfraccriterion(:, 3), 10, 'k', 'filled');
+% ylabel('resistant fraction');
+% xlabel('((1 - c)(1 - \betamin))/((1 - \alpha ) / \gamma)');
+% ylim([0 1])
+% xlim([0 2.5])
+% set(gca, 'fontsize', 24)
+% axis square

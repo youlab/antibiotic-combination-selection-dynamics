@@ -133,21 +133,20 @@ conditioncounter = 2;
 for i = 1:nconditions
     strainGRs(conditioninfo(i, 2), conditioninfo(i, 3), :, :) = GRconditions{i+1}(:, :);
 end
-%%
-% plot all replicates
-figure(4)
-hold on
-for j = 1:nmedia
-    for i = 1:nstrains
-        subplot(nmedia, nstrains, (j-1)*nstrains+i)
-        plot(timepoints, squeeze(strainGRs(i, j, :, :)), 'k');
-        axis([0 24 -2 2])
-    end
-end
+%% plot all replicates
+% figure(4)
+% hold on
+% for j = 1:nmedia
+%     for i = 1:nstrains
+%         subplot(nmedia, nstrains, (j-1)*nstrains+i)
+%         plot(timepoints, squeeze(strainGRs(i, j, :, :)), 'k');
+%         axis([0 24 -2 2])
+%     end
+% end
 
 %% Averages
 
-avdata = squeeze(mean(straindata, 3)); % strain plasmid media timepoint
+avdata = squeeze(mean(straindata, 3)); % strain media [replicate] timepoint
 avGRs = squeeze(mean(strainGRs, 3)); % 
 avGFP = squeeze(mean(GFPstraindata, 3));
 avBFP = squeeze(mean(BFPstraindata, 3));
@@ -231,8 +230,8 @@ end
 %ylabel("OD");
 xlim([0 24]);
 ylim([0 1.5]);
-%legend(strainnames(strainorder), 'Location', 'eastoutside');
-%legend('boxoff');
+legend(strainnames(strainorder), 'Location', 'eastoutside');
+legend('boxoff');
 %title(medianames(2));
 set(gca,'FontSize',30)
 axis square

@@ -49,46 +49,88 @@ strainnames = ["Low Copy Bla", "Low Copy BlaM", "High Copy Bla", "High Copy BlaM
 
 %% average with stderr
 
-for i = 1:nstrains
-    for j = 1:length(abxconcentrations)
-        f = figure(10*i + j);
-        hold on
-        errorbar(inhconcentrations, squeeze(averagefractions(2, j, :, i)), squeeze(stderrfractions(2, j, :, i)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k') %'Color', [0.2 0.2 0.2], 'MarkerFaceColor', [0.2 0.2 0.2])
-        yline(averagefractions(1, 1, 1, i), ':', 'Color', [0.7 0.7 0.7], 'LineWidth', 2);
-        axis square
-        ylim([0 1])
-        xlim([0 max(inhconcentrations)])
-        xlabel("CLA (\mug/mL)")
-        ylabel("Resistant Fraction")
-        
-        title(strcat(strainnames(i), " + ", num2str(abxconcentrations(j)), " \mug/mL AMX"))
-        set(gca, 'FontSize', 20)
-        
-        %saveas(f, strcat(strainnames(i), " ", num2str(abxconcentrations(j)), " AMX Averages"), 'jpeg')
-    end
-end
-
-%close all
+% for i = 1:nstrains
+%     for j = 1:length(abxconcentrations)
+%         f = figure(10*i + j);
+%         hold on
+%         errorbar(inhconcentrations, squeeze(averagefractions(2, j, :, i)), squeeze(stderrfractions(2, j, :, i)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k') %'Color', [0.2 0.2 0.2], 'MarkerFaceColor', [0.2 0.2 0.2])
+%         yline(averagefractions(1, 1, 1, i), ':', 'Color', [0.7 0.7 0.7], 'LineWidth', 2);
+%         axis square
+%         ylim([0 1])
+%         xlim([0 max(inhconcentrations)])
+%         xlabel("CLA (\mug/mL)")
+%         ylabel("Resistant Fraction")
+% 
+%         title(strcat(strainnames(i), " + ", num2str(abxconcentrations(j)), " \mug/mL AMX"))
+%         set(gca, 'FontSize', 20)
+% 
+%         %saveas(f, strcat(strainnames(i), " ", num2str(abxconcentrations(j)), " AMX Averages"), 'jpeg')
+%     end
+% end
+% 
+% %close all
 
 %% plot Bla and BlaM together
 
+% % low copy
+% figure(100)
+% hold on
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 1)), squeeze(stderrfractions(2, 2, :, 1)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 2)), squeeze(stderrfractions(2, 2, :, 2)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
+% axis square
+% ylim([0 1])
+% xlim([0 max(inhconcentrations)])
+% xlabel("Clavulanic acid (\mug/mL)")
+% ylabel("Resistant Fraction")
+% %legend('Periplasmic', 'Cytoplasmic', 'Location', 'southeast', 'FontSize', 24)
+% %legend('boxoff')
+% set(gca, 'FontSize', 24)
+% 
+% %high copy
+% figure(101)
+% hold on
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 3)), squeeze(stderrfractions(2, 2, :, 3)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
+% errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 4)), squeeze(stderrfractions(2, 2, :, 4)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
+% axis square
+% ylim([0 1])
+% xlim([0 max(inhconcentrations)])
+% %xlabel("CLA (\mug/mL)")
+% %ylabel("Resistant Fraction")
+% %legend('Periplasmic', 'Cytoplasmic', 'Location', 'northwest', 'FontSize', 24)
+% %legend('boxoff')
+% set(gca, 'FontSize', 30)
+% 
+% %close all
+
+%% plot with replicates
+
+% datasplit format: timepoints, abxconcentration, inhconcentration, strain,
+% replicate, [fraction OD GFP BFP]
+
 % low copy
-figure(100)
+figure(200)
 hold on
+% scatter replicates
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 1, :, 1)), 100, [0.7 0.7 0.7], 'filled');
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 2, :, 1)), 100, [0.2 0.2 0.2]);
+% plot averages
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 1)), squeeze(stderrfractions(2, 2, :, 1)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 2)), squeeze(stderrfractions(2, 2, :, 2)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
 axis square
 ylim([0 1])
 xlim([0 max(inhconcentrations)])
-xlabel("Clavulanic acid (\mug/mL)")
-ylabel("Resistant Fraction")
+% xlabel("Clavulanic acid (\mug/mL)")
+% ylabel("Resistant Fraction")
 %legend('Periplasmic', 'Cytoplasmic', 'Location', 'southeast', 'FontSize', 24)
 %legend('boxoff')
 set(gca, 'FontSize', 24)
 
 %high copy
-figure(101)
+figure(201)
 hold on
+% scatter replicates
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 3, :, 1)), 100, [0.7 0.7 0.7], 'filled');
+scatter(inhconcentrations, squeeze(datasplit(2, 2, :, 4, :, 1)), 100, [0.2 0.2 0.2]);
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 3)), squeeze(stderrfractions(2, 2, :, 3)), 'o-', 'Color', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 10, 'LineWidth', 1.5)
 errorbar(inhconcentrations, squeeze(averagefractions(2, 2, :, 4)), squeeze(stderrfractions(2, 2, :, 4)), 'o-', 'Color', [0.4 0.4 0.4], 'LineStyle', ':', 'MarkerSize', 10, 'LineWidth', 1.5)
 axis square

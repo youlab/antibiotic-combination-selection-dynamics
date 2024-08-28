@@ -211,5 +211,5 @@ for hour = plottimepoints
     set(gca, 'fontsize', 30)
     axis square
     hold off
-
+    set(gcf, 'position', [500 300 700 500])
 end
